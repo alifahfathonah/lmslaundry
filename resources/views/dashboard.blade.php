@@ -57,7 +57,7 @@
                                             @csrf
                                             <input type="hidden" name="hargasatuan" class="form-control form-control-sm" value="{{$od->harga_satuan}}" placeholder="Timbang Pakaian"> 
                                             <input type="hidden" name="kodeorder" value="{{$od->kode_orders}}">
-                                            
+
                                             <div class="input-group mb-3">
                                                 <input type="text" name="qty" class="form-control form-control-sm" placeholder="Timbang Pakaian"> 
                                                 <span class="input-group-append">
@@ -82,21 +82,29 @@
                                             <form method="post" action="orderstatus/poststrika">
                                             @csrf
                                                 <input type="hidden" name="kodeorder" value="{{$od->kode_orders}}">
-                                                <button type="submit" class="btn btn-primary btn-md btn-flat">Strika</button>
+                                                <button type="submit" class="btn btn-danger btn-md btn-flat">Strika</button>
                                             </form>
                                             @elseif($od->status_order==6)
                                             <form method="post" action="orderstatus/postserahkan">
                                             @csrf
                                                 <input type="hidden" name="kodeorder" value="{{$od->kode_orders}}">
-                                                <button type="submit" class="btn btn-primary btn-md btn-flat">Serahkan Ke Pelanggan</button>
+                                                <button type="submit" class="btn btn-dangerbtn-md btn-flat">Serahkan Ke Pelanggan</button>
                                             </form>
                                             @endif
                                             <hr>
-                                            <form method="post" action="orderstatus/postbayar">
-                                            @csrf
-                                                <input type="hidden" name="kodeorder" value="{{$od->kode_orders}}">
-                                                <button type="submit" class="btn btn-success btn-md btn-flat">Bayar</button>
-                                            </form>
+                                            @foreach($invoice as $i)
+                                                @if($i->kode_order==$od->kode_orders)
+                                                    @if($i->status==1) 
+                                                        <form method="post" action="orderstatus/postbayar">
+                                                        @csrf
+                                                            <input type="hidden" name="kodeorder" value="{{$od->kode_orders}}">
+                                                            <button type="submit" class="btn btn-success btn-md btn-flat">Pembayaran</button>
+                                                        </form>
+                                                    @else
+                                                        <p class="text-green"><strog>Lunas</strong></p>
+                                                    @endif
+                                                @endif
+                                            @endforeach
                                         </span>
                                     </div>
                                 </li>

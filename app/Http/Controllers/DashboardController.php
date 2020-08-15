@@ -15,8 +15,10 @@ class DashboardController extends Controller
                 ->select('kode_orders', 'laundry_type','harga_satuan','status_order','nama_pelanggan',DB::raw('SUM(total_harga) as totalharga'))
                 ->groupBy('kode_orders')
                 ->get();
+        $invoice = DB::table('lms_invoice')
+                ->get();
 
-        return view ('dashboard', compact('orders'));
+        return view ('dashboard', compact('orders','invoice'));
     }
 
     public function satuan (Request $reqsatuan)

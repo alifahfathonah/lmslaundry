@@ -49,7 +49,18 @@
     <script src="{{asset('public/plugins/alertify/lib/alertify.min.js')}}"></script>
     <!-- Select2 -->
     <script src="{{asset('public/plugins/select2/js/select2.full.min.js')}}"></script>    
+<style>
+    .carousel .item {
+        height: 300px;
+    }
 
+    .item img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-height: 300px;
+    }
+</style>
 </head>
 <body class="hold-transition layout-top-nav layout-fixed layout-navbar-fixed layout-footer-fixed text-sm">
     <div class="wrapper">
